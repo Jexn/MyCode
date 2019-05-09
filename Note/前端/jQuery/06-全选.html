@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选择</title>
+    <script src="../../../../Frame/JavaScript/jquery-3.4.0.js"></script>
+    <script>
+        $(function(){
+            $("#selectedAll").click(function(){
+                $("input:checkbox").attr("checked",true);
+            });
+
+            $("#notAll").click(function(){
+                $("input:checkbox").removeAttr("checked",false);
+            });
+
+            $("#invert").click(function(){
+                $("input:checkbox").prop("checked",function(){
+                    console.log(this.checked);
+                });
+
+                $("input:checkbox").prop("checked",function(i,val){
+                    return !val;
+                });
+            });
+
+            $("#submit").click(function(){
+                var str = "";
+                $("input:checked").each(function(){
+                    str += this.value+" ";
+                });
+                alert(str);
+            });
+        })
+    </script>
+</head>
+<body>
+    <form action="#" method="get">
+        <p>你喜欢的爱好：</p>
+        <input type="checkbox" name="items" value="足球">足球
+        <input type="checkbox" name="items" value="篮球">篮球
+        <input type="checkbox" name="items" value="羽毛球">羽毛球
+        <input type="checkbox" name="items" value="乒乓球">乒乓球
+        <br>
+
+        <input type="button" id="selectedAll" value="全选">
+        <input type="button" id="notAll" value="全不选">
+        <input type="button" id="invert" value="反选">
+        <input type="submit" id="submit" value="提交">
+    </form>
+</body>
+</html>

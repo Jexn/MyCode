@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单提交</title>
+</head>
+<body>
+    <form accept="#" method="POST">
+        <table>
+                <!-- 文本标签 -->
+                <tr>
+                    <td>用户：</td>
+                    <td><input name="username" type="text"></td>
+                </tr>
+                
+                <tr>
+                    <td>密码：</td>
+                    <td><input name="password" type="password"></td>
+                </tr>
+                
+                <!-- 单选标签 -->
+                <tr>
+                    <td>性别：</td>
+                    <td>
+                        <input name="sex" type="radio" value="male" checked="checked">男
+                        <input name="sex" type="radio" value="female">女
+                    </td>
+                </tr>
+
+                <!-- 多选标签 -->
+                <tr>
+                    <td>爱好：</td>
+                    <td>
+                        <input name="hobby" type="checkbox" value="football">足球
+                        <input name="hobby" type="checkbox" value="basketball">篮球
+                        <input name="hobby" type="checkbox" value="walking">散步
+                    </td>
+                </tr>
+
+                <!-- 下拉标签 -->
+                <tr>
+                    <td>城市：</td>
+                    <td>
+                        <select name="city">
+                            <option value="bj">北京</option>
+                            <option value="dj" selected="selected">东京</option>
+                            <option value="nj">南京</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <!-- 文件上传 -->
+                <tr>
+                    <td>上传头像：</td>
+                    <td>
+                        <input name="file" type="file">
+                    </td>
+                </tr>
+
+                <!-- 文本域 -->
+                <tr>
+                    <td>备注：</td>
+                    <td>
+                        <textarea name="remake" id="flag" cols="20" rows="5">输入备注信息</textarea>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td>
+                        <input type="submit" value="登录">
+                    </td>
+                    <td>
+                        <input type="reset" value="重置">
+                    </td>
+                </tr>
+        </table>
+    </form>
+</body>
+</html>

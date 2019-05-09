@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>元素选择器</title>
+    <style>
+        /* 元素选择器 */
+        span {
+            display: block;
+            background-color: blue;
+        }
+
+        /* id选择器 */
+        #red {
+            display: block;
+            background-color: red;
+        }
+
+        /* 类选择器 */
+        .green {
+            display: block;
+            background-color: green;
+        }
+
+        /* 属性选择器 */
+        input[type="text"]{
+            background-color: ghostwhite;
+        }
+        input[type="password"]{
+            background-color: gainsboro;
+        }
+
+        /* 伪元素选择器 */
+        /* 静止状态 */
+        a:link{
+            color: blue;
+        }
+        /* 悬浮状态 */
+        a:hover{
+            color: red;
+        }
+        /* 触发状态 */
+        a:active{
+            color: orange;
+        }
+        /* 完成状态 */
+        a:visited{
+            color: pink;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div>
+        <span>蓝色</span>
+        <span id="red">红色</span>
+        <span class="green">绿色</span>
+        <span>紫色</span>
+        <span class="green">绿色</span>
+    </div>
+
+    <!-- 属性选择 -->
+    <div>
+        <form action="#" method="get">
+            <table>
+                <tr>
+                    <td>用户：</td>
+                    <td><input type="text"></td>
+                </tr>
+
+                <tr>
+                    <td>密码：</td>
+                    <td><input type="password" name="password" id="password"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <!-- 伪元素选择器 -->
+    <div>
+        <a href="https://www.google.com">谷歌一下</a>
+    </div>
+</body>
+
+</html>

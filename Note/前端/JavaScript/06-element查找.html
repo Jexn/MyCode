@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>利用Element查找节点</title>
+    <script>
+        window.onload = function () {
+            var btn = document.getElementById("btn");
+            btn.onclick = function () {
+                // 查找子节点第一种方式
+                var node = document.getElementById("list");
+                var allList = node.getElementsByTagName("li");
+                for (let index = 0; index < allList.length; index++) {
+                    alert(allList[index].innerHTML);
+                }
+            }
+
+            var btn2 = document.getElementById("btn2");
+            btn2.onclick = function () {
+                // 利用childNodes查找
+                var node = document.getElementById("oList");
+                var childNodes = node.childNodes;
+                console.log(childNodes);
+                for (let index = 0; index < childNodes.length; index++) {
+                    if (childNodes[index].nodeType == 1) {
+                        alert(childNodes[index].innerHTML);
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <ul id="list">
+        <li>Java编程是想</li>
+        <li>Effective Java</li>
+        <li>MySql必知必会</li>
+        <li>程序员的英语</li>
+    </ul>
+    <button id="btn">查找li标签元素信息</button>
+
+    <ol id="oList">
+        <li>6:40起床</li>
+        <li>7:00跑步</li>
+        <li>7:10背单词</li>
+        <li>8:30学习</li>
+    </ol>
+    <button id="btn2">childNodes查找</button>
+</body>
+
+</html>

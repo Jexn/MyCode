@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>系统事件</title>
+    <script>
+        window.onload = function(){
+            function mine(){
+                alert("booooooooooom");
+            }
+
+            var btn = document.getElementById("btnId");
+            btn.onclick = mine;
+        }
+    </script>
+</head>
+<body>
+    <button id="btnId">系统事件</button>
+</body>
+</html>

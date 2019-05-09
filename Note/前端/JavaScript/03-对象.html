@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>对象</title>
+    <script>
+        var person = new Object();
+        person.name = "刘强东";
+        person.age = 41;
+        person.introduce = function(){
+            alert(person.name+":"+person.age);
+        }
+        person.introduce();
+
+        var obj = {
+            name:"老王",
+            age:20,
+            introduce:function(){
+                alert(this.name+",我是你哥哥");
+            }
+        }
+
+        obj.introduce();
+    </script>
+</head>
+<body>
+    <h2>JavaScript对象</h2>
+</body>
+</html>

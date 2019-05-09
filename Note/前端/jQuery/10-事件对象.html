@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件对象</title>
+    <style>
+        #div1{
+            width: 600px;
+            height: 400px;
+        }
+        #div2{
+            width: 600px;
+            height: 40px;
+        }
+        div{
+            border: 1px solid black;
+            margin: 5px auto;
+        }
+    </style>
+    <script src="../../../../Frame/JavaScript/jquery-3.4.0.js"></script>
+    <script>
+        $(function(){
+            $("#div1").mousemove(function(a){
+                $("p").text("当前x坐标："+a.clientX+",y坐标："+a.clientY);
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="div1">
+    </div>
+
+    <div id="div2">
+        <p id="content"></p>
+    </div>
+</body>
+</html>

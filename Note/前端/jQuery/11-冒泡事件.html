@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>冒泡事件</title>
+
+    <style>
+        div {
+            margin: 0 auto;
+        }
+
+        #div1 {
+            background-color: rebeccapurple;
+            width: 200px;
+            height: 200px;
+        }
+
+        #div2 {
+            width: 150px;
+            height: 150px;
+            background-color: aquamarine;
+        }
+
+        #div3 {
+            width: 100px;
+            height: 100px;
+            background-color: blueviolet;
+        }
+    </style>
+
+    <script src="../../../../Frame/JavaScript/jquery-3.4.0.js"></script>
+    <script>
+        $(function () {
+            $("#div1").click(function () {
+                alert("div1");
+            });
+            $("#div2").click(function () {
+                alert("div2");
+            }); 
+            $("#div3").click(function () {
+                alert("div3");
+                return false;
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div id="div1">
+        <span>div1</span>
+        <div id="div2">
+            <span>div2</span>
+            <div id="div3">
+                <span>div3</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../../../../Frame/JavaScript/jquery-3.4.0.js"></script>
+    <script>
+        $(function(){
+            alert("appendTo添加元素");
+            // 添加html元素节点到指定的元素节点的子节点中
+            $("<li>增加的标签</li>").appendTo("#ul");
+
+            var $ul = $("#ul");
+            alert($ul.text());
+
+            // 使用原生的DOM操作和jQuery获取的对象类型不同
+            var domObject = document.getElementById("ul");
+            alert($ul);       // [object Object]
+            alert(domObject); // [object HTMLUListElement]
+        });
+    </script>
+</head>
+<body>
+    <ul id="ul">
+        <li id="li">北京</li>
+        <li>上海</li>
+        <li>广州</li>
+        <li>深圳</li>
+    </ul>
+</body>
+</html>

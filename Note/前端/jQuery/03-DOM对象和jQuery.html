@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>DOM对象和jQuery对象</title>
+    <script src="../../../../Frame/JavaScript/jquery-3.4.0.js"></script>
+    <script>
+        $(function(){
+
+            // 原生DOM操作
+            var dom2dom = document.getElementById("dom2dom");
+            dom2dom.onclick = function(){
+                alert(document.getElementById("testDiv").innerHTML);
+            }
+
+            // jQuery操作DOM
+            $("#dom2jQuery").click(function(){
+                alert($("#testDiv").text());
+            });
+
+
+            /**
+             * jQuery对象和DOM对象的区别
+             * 1. 各自只能使用各自的属性和方法
+             * 2. DOM对象更强大
+             * 3. DOM对象可以转换成jQuery对象
+             *      var domObj = document.getElementById("btn");
+             *      var $obj = $(domObj);
+             * 4. jQuery对象也可以转换成DOM对象
+             *      jQuery对象本质是DOM对象的集合
+             */
+
+             var $btns = $("button");
+             console.log($btns);
+             alert($btns[3]);  // [object HTMLButtonElement]
+        });
+    </script>
+</head>
+
+<body>
+    <div id="testDiv">挤进尚硅谷，注定你优秀！</div>
+    <br/>
+    <button id="dom2dom">使用DOM对象调用DOM方法</button>
+    <button id="dom2jQuery">使用DOM对象调用jQuery方法</button>
+    <button id="jQuery2jQuery">使用jQuery对象调用jQuery方法</button>
+    <button id="jQuery2dom">使用jQuery对象调用DOM方法</button>
+</body>
+
+</html>
