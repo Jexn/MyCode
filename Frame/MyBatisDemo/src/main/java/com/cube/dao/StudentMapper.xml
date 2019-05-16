@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cube">
+
+    <!--  增加数据  -->
+    <insert id="insertStudent" parameterType="student">
+        INSERT INTO t_student(name, age, score) VALUES (#{name},#{age},#{score})
+        <!-- 获取自增的主键 -->
+        <selectKey resultType="int" keyProperty="id" order="AFTER">
+            SELECT @@identity
+        </selectKey>
+    </insert>
+
+    <!--  删除数据  -->
+    <delete id="deleteStudent" parameterType="student">
+        DELETE FROM t_student WHERE id = #{id}
+    </delete>
+
+    <!--  更新数据  -->
+    <update id="updateStudent">
+        UPDATE t_student set name= #{name},age= #{age},score= #{score} where id = #{id}
+    </update>
+
+    <!--  resultType写上单条数据对应的类  -->
+    <select id="selectAllStudent" resultType="student">
+        SELECT id,name,age,score FROM t_student
+    </select>
+
+    <select id="selectStudentById" resultType="student">
+        SELECT id,name,age,score FROM t_student where id = #{id}
+    </select>
+
+    <select id="selectStudentByName" resultType="student">
+        <!--方式一：-->
+        SELECT id,name,age,score FROM t_student where name like '%' #{name} '%'
+        <!--方式二：#{name}必须改成${value},直接拼接,没有占位符,有SQL注入问题-->
+        <!--SELECT id,name,age,score FROM t_student where name like '%${value}%'-->
+    </select>
+</mapper>

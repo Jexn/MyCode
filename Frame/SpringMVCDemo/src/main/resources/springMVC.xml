@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/mvc
+           http://www.springframework.org/schema/mvc/spring-mvc.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--  注解式配置，组件扫描器  -->
+    <context:component-scan base-package="com.cube.*"/>
+    <!--  注解驱动，如果使用mvc:resources配置静态资源，并且使用注解式配置，必须添加注解驱动  -->
+    <mvc:annotation-driven validator="dataCheck"/>
+
+    <!--  注册拦截器  -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/returnResult/**"/>
+            <bean class="com.cube.Interceptor.MyInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <!--  注册数据验证hibernate-validator  -->
+    <bean id="dataCheck" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+    </bean>
+
+    <!--  注册MultipartResolver，由DispatcherServlet来调用  -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--设置字符编码防止文件名乱码-->
+        <property name="defaultEncoding" value="utf-8"/>
+        <!--设置上传文件的总大小，单位是字节b-->
+        <!--        <property name="maxUploadSize" value="1048576"/>-->
+        <!--设置单个上传文件的大小，单位是字节b-->
+        <property name="maxUploadSizePerFile" value="1048576"/>
+        <!--设置内存缓冲区的大小，当超过该值的时候会写入到临时目录-->
+        <!--        <property name="maxInMemorySize" value="1048576"/>-->
+        <!--设置临时目录-->
+        <!--        <property name="uploadTempDir" value="tempUpload"/>-->
+        <!--默认是false，如果设置为true的话，不会将文件路径去除，在IE浏览器下上传时会将路径名也作为文件名上传：D:\image\monkey.png-->
+        <!--        <property name="preserveFilename" value="false"/>-->
+        <!--是否使用懒加载，默认是false-->
+        <!--        <property name="resolveLazily" value="true"/>-->
+    </bean>
+
+    <!--  异常处理  -->
+    <!--    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">-->
+    <!--        &lt;!&ndash;  默认的异常处理 &ndash;&gt;-->
+    <!--        <property name="defaultErrorView" value="error"/>-->
+
+    <!--        <property name="exceptionMappings">-->
+    <!--            <props>-->
+    <!--                &lt;!&ndash; 可以添加多个自定义异常 &ndash;&gt;-->
+    <!--                <prop key="com.cube.Exception.MyException">defineError</prop>-->
+    <!--            </props>-->
+    <!--        </property>-->
+
+    <!--        &lt;!&ndash; 异常信息处理，在JSP页面中可以直接获取value的错误信息 &ndash;&gt;-->
+    <!--        <property name="exceptionAttribute" value="ex"/>-->
+    <!--    </bean>-->
+
+    <!--  自定义异常处理  -->
+    <bean class="com.cube.Exception.DefineHandlerException"/>
+
+    <!--  外部视图资源解析器。注意：外部视图资源解析器必须在内部视图解析器之前，否则无法正确解析  -->
+    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
+    <!--定义外部资源view对象-->
+    <bean id="cube" class="org.springframework.web.servlet.view.RedirectView">
+        <property name="url" value="https://www.baidu.com"/>
+    </bean>
+
+    <!--  内部视图解析器  -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/Views/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--  非注解式配置  -->
+    <bean id="/first.do" class="com.cube.controllers.FirstController"/>
+
+    <!--  解决静态资源不能访问的问题:使用mvc:default-servlet-handler  -->
+    <!--    <mvc:default-servlet-handler/>-->
+
+    <!--  解决静态资源不能访问的问题:使用mvc:resources  -->
+    <mvc:resources mapping="/images/**" location="/images/"/>
+    <mvc:resources mapping="/JavaScript/**" location="/JavaScript/"/>
+
+</beans>
