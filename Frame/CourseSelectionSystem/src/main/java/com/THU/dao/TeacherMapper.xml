@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.THU.dao.TeacherDao">
+    <!--    // 新建教师-->
+    <!--    void createTeacher(Teacher teacher);-->
+    <insert id="createTeacher">
+        INSERT INTO teacher_info(id, name, sex, age, Seniority)
+        VALUES (#{id}, #{name}, #{sex}, #{age}, #{Seniority})
+    </insert>
+    <!--    // 根据ID删除教师-->
+    <!--    void deleteTeacher(Integer id);-->
+    <delete id="deleteTeacher">
+        DELETE
+        FROM teacher_info
+        WHERE id = #{id}
+    </delete>
+    <!--    // 更新教师信息-->
+    <!--    void updateTeacher(Teacher teacher);-->
+    <update id="updateTeacher">
+        UPDATE teacher_info
+        SET Seniority=#{Seniority},
+            age=#{age}
+        WHERE id = #{id}
+    </update>
+
+    <!--        // 查找教师信息-->
+    <!--        Course getTeacherInfoById(Integer id);-->
+    <select id="getTeacherInfoById" resultType="teacher">
+        SELECT id, name, sex, age, Seniority
+        FROM teacher_info
+        WHERE id = #{id}
+    </select>
+
+    <!--        // 查找该教师所代课的课程-->
+    <!--        List<Course> getTeacherCoursesById(Integer id);-->
+    <select id="getTeacherCoursesById" resultType="map">
+        SELECT c.id, c.name, t.id, t.name
+        FROM teacher_info t,
+             course_info c
+        WHERE c.teacher_id = #{id}
+          AND c.teacher_id = t.id
+    </select>
+</mapper>

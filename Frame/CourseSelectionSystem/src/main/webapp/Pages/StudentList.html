@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学生信息表</title>
+    <script src="JavaScript/jquery-3.3.1.min.js"></script>
+    <script src="JavaScript/bootstrap.js"></script>
+    <script src="JavaScript/studentList.js"></script>
+    <link href="CSS/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+<div class="container theme-showcase" role="main">
+    <div id="msg">
+    </div>
+    <div class="page-header">
+        <input id="id" type="text" name="id" placeholder="请输入id">
+        <button id="query" type="button" class="btn btn-sm btn-primary">查询</button>
+        <button id="add" type="button" class="btn btn-sm btn-success">添加</button>
+    </div>
+    <div class="row">
+        <div class="">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>姓名</th>
+                    <th>年龄</th>
+                    <th>性别</th>
+                    <th>年级</th>
+                    <th>课程</th>
+                    <th>成绩</th>
+                </tr>
+                </thead>
+                <tbody id="tbody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

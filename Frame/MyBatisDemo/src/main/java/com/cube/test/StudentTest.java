@@ -25,9 +25,7 @@ public class StudentTest {
     @Test
     public void insertStudent(){
         Student student = new Student("刘德华",30,89);
-        System.out.println(student);
         studentDao.insertStudent(student);
-        System.out.println(student);
     }
 
     @Test

@@ -79,12 +79,12 @@
             success: function (result) {
                 if (result === "success") {
                     findAll();
-                    $("#msg").html("<div class=\"alert alert-info\" role=\"alert\">删除成功!</div>")
+                    $("#msg").html("<div class=\"alert alert-info\" role=\"alert\">删除成功!</div>");
                     setTimeout(function () {
                         $("#msg").empty();
                     }, 2000);
                 } else {
-                    $("#msg").html("<div class=\"alert alert-warning\" role=\"alert\">删除失败!</div>")
+                    $("#msg").html("<div class=\"alert alert-warning\" role=\"alert\">删除失败!</div>");
                     setTimeout(function () {
                         $("#msg").empty();
                     }, 2000);

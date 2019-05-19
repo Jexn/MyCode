@@ -57,6 +57,7 @@ public class UserRestController {
         return JSON.toJSONString("success");
     }
 
+    // 根据ID删除数据
     @DeleteMapping("/users/{id}")
     public String delete(@PathVariable String id){
         try {
