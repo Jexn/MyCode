@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="userService" class="com.cube.service.impl.UserServiceImpl"/>
+
+    <bean id="myAspect" class="com.cube.aspect.MyAspect"/>
+
+    <aop:config>
+
+        <!--    定义切入点    -->
+        <aop:pointcut id="addUserPointcut" expression="execution(* com.cube.service.impl.UserServiceImpl.addUser())"/>
+        <aop:pointcut id="selectUserByIdPointcut"
+                      expression="execution(* com.cube.service.impl.UserServiceImpl.selectUserById(..))"/>
+        <aop:pointcut id="updateUserPointcut"
+                      expression="execution(* com.cube.service.impl.UserServiceImpl.updateUser())"/>
+        <aop:pointcut id="deleteUserPointcut"
+                      expression="execution(* com.cube.service.impl.UserServiceImpl.deleteUser())"/>
+        <aop:pointcut id="selectUserPointcut"
+                      expression="execution(* com.cube.service.impl.UserServiceImpl.selectUser())"/>
+
+        <!--    定义切面    -->
+        <aop:aspect ref="myAspect">
+            <!--    定义通知       -->
+
+            <!--    前置通知       -->
+            <aop:before method="beforeNotify" pointcut-ref="addUserPointcut"/>
+            <!--    后置通知       -->
+            <aop:after-returning method="afterNotify" pointcut-ref="updateUserPointcut" returning="result"/>
+            <!--    异常通知       -->
+            <aop:after-throwing method="afterThrowingNotify" pointcut-ref="selectUserByIdPointcut" throwing="ex"/>
+            <!--    最终通知        -->
+            <aop:after method="afterFinalNotify" pointcut-ref="selectUserPointcut"/>
+            <!--    环绕通知        -->
+            <aop:around method="aroundNotify" pointcut-ref="deleteUserPointcut"/>
+
+
+        </aop:aspect>
+    </aop:config>
+</beans>

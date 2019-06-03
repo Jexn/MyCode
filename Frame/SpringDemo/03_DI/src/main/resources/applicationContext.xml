@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--Setter方式-->
+    <!--    <bean id="userService" class="com.cube.service.impl.UserServiceImpl">-->
+    <!--        <property name="user" ref="user"/>-->
+    <!--    </bean>-->
+
+    <!--    <bean id="user" class="com.cube.bean.UserImpl"/>-->
+
+    <!--  构造方法式注入  -->
+    <!--    <bean id="userService" class="com.cube.service.impl.UserServiceImpl">-->
+    <!--        <constructor-arg ref="user"/>-->
+    <!--    </bean>-->
+
+    <!--  注解式，文件扫描器  -->
+    <context:component-scan base-package="com.cube"/>
+</beans>

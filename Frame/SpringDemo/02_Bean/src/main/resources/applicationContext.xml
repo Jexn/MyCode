@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--  默认的Bean创建方式  -->
+    <bean id="studentService" init-method="init" destroy-method="destroy" class="com.cube.service.impl.StudentServiceImpl"/>
+
+    <!--  实例模式装载Bean  -->
+    <!--    <bean id="beanFactory" class="com.cube.factory.BeanFactory"/>-->
+    <!--    <bean id="studentService" factory-bean="beanFactory" factory-method="createStudentServiceImpl"/>-->
+
+    <!--  静态工厂装载Bean  -->
+    <!--    <bean id="studentService" class="com.cube.factory.BeanStaticFactory" factory-method="createStudentServiceImpl"/>-->
+
+    <!--  注册BeanPostProcessor后处理器  -->
+    <bean id="myBeanPostProcessor" class="com.cube.Proxy.MyBeanPostProcessor"/>
+</beans>
