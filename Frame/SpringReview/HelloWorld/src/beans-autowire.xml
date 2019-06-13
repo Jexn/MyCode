@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="address" class="com.cube.autowire.Address">
+        <property name="city" value="广州"/>
+        <property name="street" value="大学城"/>
+    </bean>
+
+    <bean id="car" class="com.cube.autowire.Car">
+        <property name="name" value="奔驰"/>
+        <property name="area" value="德国"/>
+        <property name="price" value="500000"/>
+    </bean>
+
+    <bean id="person" class="com.cube.autowire.Person" p:name="王思聪" autowire="byName"/>
+</beans>

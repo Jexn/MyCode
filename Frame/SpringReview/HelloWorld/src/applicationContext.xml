@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!--
+        配置Bean
+        class:bean的全类名，通过反射的方式在IOC容器中创建Bean，所以要求Bean中必须有无参构造器
+        id:标识容器中的bean，id唯一
+    -->
+
+    <!--  set属性注入  -->
+    <bean id="hello" class="com.cube.beans.Hello">
+        <property name="name" value="隔壁老王"/>
+    </bean>
+
+    <!--  Spring 支持 3 种依赖注入的方式
+            - 属性注入
+            - 构造器注入
+            - 工厂方法注入（很少使用，不推荐）
+    -->
+
+    <!--  通过构造方法来配置Bean的属性  -->
+    <bean id="car" class="com.cube.beans.Car">
+        <constructor-arg name="brand" value="Audi"/>
+        <constructor-arg name="corp" value="SH"/>
+        <constructor-arg name="price" value="34000"/>
+    </bean>
+
+    <bean id="person" class="com.cube.beans.Person">
+        <property name="name" value="老王"/>
+        <property name="age" value="22"/>
+        <!--    外部Bean引入方式    -->
+        <property name="car" ref="car"/>
+    </bean>
+
+    <bean id="person1" class="com.cube.beans.Person">
+        <property name="name" value="老赵"/>
+        <property name="age" value="23"/>
+        <!--    内部Bean方式注入    -->
+        <property name="car">
+            <bean class="com.cube.beans.Car">
+                <constructor-arg name="brand" value="福特"/>
+                <constructor-arg name="corp" value="US"/>
+                <constructor-arg name="price" value="20000"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="car1" class="com.cube.collectionsBean.Car">
+        <constructor-arg name="brand" value="奔驰"/>
+        <constructor-arg name="corp" value="德国"/>
+        <constructor-arg name="price" value="500000"/>
+    </bean>
+
+    <bean id="car2" class="com.cube.collectionsBean.Car">
+        <constructor-arg name="brand" value="宝马"/>
+        <constructor-arg name="corp" value="德国"/>
+        <constructor-arg name="price" value="400000"/>
+    </bean>
+
+    <bean id="car3" class="com.cube.collectionsBean.Car">
+        <constructor-arg name="brand" value="丰田"/>
+        <constructor-arg name="corp" value="日本"/>
+        <constructor-arg name="price" value="100000"/>
+    </bean>
+
+    <!--  集合属性配置  -->
+    <bean id="collectionPerson" class="com.cube.collectionsBean.Person">
+        <property name="name" value="王思聪"/>
+        <property name="age" value="30"/>
+        <property name="cars" ref="cars">
+            <!--            <list>-->
+            <!--                <ref bean="car1"/>-->
+            <!--                <ref bean="car2"/>-->
+            <!--                <ref bean="car3"/>-->
+            <!--            </list>-->
+        </property>
+    </bean>
+
+    <!--  util使用外部bean  -->
+    <util:list id="cars">
+        <ref bean="car1"/>
+        <ref bean="car2"/>
+        <ref bean="car3"/>
+    </util:list>
+
+    <bean id="dataSource" class="com.cube.collectionsBean.DataSource">
+        <property name="properties">
+            <props>
+                <prop key="user">root</prop>
+                <prop key="password">password</prop>
+                <prop key="jdbcURL">jdbc:mysql:///test</prop>
+                <prop key="driverClass">com.mysql.jdbc.Drive</prop>
+            </props>
+        </property>
+    </bean>
+
+</beans>

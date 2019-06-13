@@ -1,7 +1,5 @@
 package JDBC.myJDBC;
 
-import org.jetbrains.annotations.Contract;
-
 /**
  * @program: MyCalculator
  * @description:
@@ -9,7 +7,6 @@ import org.jetbrains.annotations.Contract;
  * @create: 2019-05-04 10:37
  **/
 public class MyCalculator {
-    @Contract(pure = true)
     public static int add(int a, int b) {
         return a + b;
     }

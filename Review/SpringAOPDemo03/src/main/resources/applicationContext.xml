@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd ">
+
+    <bean id="accountDao" class="com.cube.dao.AccountDaoImpl">
+        <property name="runner" ref="runner"/>
+        <property name="connectionUtils" ref="connectionUtils"/>
+    </bean>
+
+    <bean id="accountService" class="com.cube.service.AccountServiceImpl">
+        <property name="accountDao" ref="accountDao"/>
+    </bean>
+
+    <bean id="proxyAccountService" factory-bean="beanFactory" factory-method="getAccountService"/>
+
+    <!--  数据源由connectionUtils管理，这里不需要再配置数据源  -->
+    <bean id="runner" class="org.apache.commons.dbutils.QueryRunner"/>
+
+    <bean id="beanFactory" class="com.cube.Factory.BeanFactory">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="accountService" ref="accountService"/>
+    </bean>
+
+    <!--  配置connectionUtils工具类  -->
+    <bean id="connectionUtils" class="com.cube.utils.ConnectionUtils">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--  配置事务管理器 -->
+    <bean id="transactionManager" class="com.cube.utils.TransactionManager">
+        <property name="connectionUtils" ref="connectionUtils"/>
+    </bean>
+
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="jdbcUrl"
+                  value="jdbc:mysql://localhost:3306/spring?serverTimezone=GMT%2B8"/>
+        <property name="user" value="root"/>
+        <property name="password" value="passwd"/>
+    </bean>
+</beans>

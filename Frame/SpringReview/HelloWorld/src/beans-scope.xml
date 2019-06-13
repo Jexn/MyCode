@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--  默认单列  -->
+    <bean id="car" class="com.cube.autowire.Car">
+        <property name="name" value="福特"/>
+        <property name="area" value="美国"/>
+        <property name="price" value="200000"/>
+    </bean>
+
+    <bean id="car2" class="com.cube.autowire.Car" scope="prototype">
+        <property name="name" value="长安"/>
+        <property name="area" value="中国"/>
+        <property name="price" value="10000"/>
+    </bean>
+</beans>
