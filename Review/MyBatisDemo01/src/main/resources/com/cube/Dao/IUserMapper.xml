@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cube.Dao.IUserDao">
+
+    <select id="findAllUser" resultType="com.cube.bean.User">
+        SELECT *
+        FROM user
+    </select>
+
+    <insert id="saveUser" parameterType="com.cube.bean.User">
+        INSERT INTO user(username, birthday, sex, address)
+        values (#{userName}, #{birthday}, #{sex}, #{address});
+    </insert>
+
+    <update id="updateUser" parameterType="com.cube.bean.User">
+        UPDATE user
+        set username = #{userName},
+            birthday=#{birthday},
+            sex=#{sex},
+            address  = #{address}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUser" parameterType="java.lang.Integer">
+        DELETE
+        FROM user
+        where id = #{id}
+    </delete>
+
+    <select id="findUserById" parameterType="int" resultType="com.cube.bean.User">
+        SELECT *
+        FROM user
+        WHERE id = #{id}
+    </select>
+
+    <select id="findUserByName" parameterType="string" resultType="com.cube.bean.User">
+        SELECT * FROM user WHERE username like #{username}
+        <!--字符串拼接方式，上面的采用预处理方式，建议使用上面那种-->
+        <!--SELECT * FROM user WHERE username like '%${value}%'-->
+    </select>
+
+    <select id="findAllNum" resultType="int">
+        SELECT COUNT(*)
+        FROM user
+    </select>
+
+    <select id="findUserByQueryVO" parameterType="com.cube.bean.QueryVO" resultType="com.cube.bean.User">
+        SELECT * FROM user WHERE username LIKE #{user.userName}
+    </select>
+
+
+</mapper>

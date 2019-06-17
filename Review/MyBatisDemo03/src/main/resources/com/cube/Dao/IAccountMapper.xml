@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cube.Dao.IAccountDao">
+
+    <select id="findAllAccount" resultType="com.cube.bean.Account">
+        SELECT *
+        FROM account
+    </select>
+
+    <select id="findAllAccountInfo" resultType="com.cube.bean.AccountInfo">
+        SELECT a.ID, u.username, a.UID, a.MONEY, u.address
+        FROM account a,
+             user u
+        WHERE a.ID = u.id;
+    </select>
+
+    <select id="findById" parameterType="int" resultType="com.cube.bean.Account">
+        SELECT *
+        FROM account
+        WHERE ID = #{id}
+    </select>
+
+    <resultMap id="accountInfo" type="com.cube.bean.Account">
+        <id property="ID" column="aid"/>
+        <result property="UID" column="UID"/>
+        <result property="MONEY" column="MONEY"/>
+        <association property="user" column="id" javaType="com.cube.bean.User">
+            <id property="id" column="id"/>
+            <result property="userName" column="username"/>
+            <result property="birthday" column="birthday"/>
+            <result property="sex" column="sex"/>
+            <result property="address" column="address"/>
+        </association>
+    </resultMap>
+
+    <select id="findAllAccountOneByOne" resultMap="accountInfo">
+        SELECT a.ID AS aid, UID, MONEY, u.*
+        FROM account a,
+             user u
+        WHERE a.ID = u.id;
+    </select>
+</mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cube.Dao.IUserDao">
+
+    <resultMap id="userMap" type="user">
+        <id property="id" column="id"/>
+        <result property="userName" column="username"/>
+        <result property="birthday" column="birthday"/>
+        <result property="sex" column="sex"/>
+        <result property="address" column="address"/>
+        <collection property="accounts" ofType="account" select="com.cube.Dao.IAccountDao.findAccountById" column="id"/>
+    </resultMap>
+
+    <select id="findAllUser" resultMap="userMap">
+        SELECT * FROM user
+    </select>
+
+    <select id="findUserById" parameterType="int" resultType="user">
+        SELECT * FROM user WHERE id = #{id}
+    </select>
+
+</mapper>
