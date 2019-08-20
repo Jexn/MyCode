@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh-CN">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>主页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/script/jquery-3.3.1.js"></script>
+    <script src="/static/script/bootstrap.js"></script>
+    <script>
+        $(function () {
+            getArticle();
+        });
+
+        function getArticle() {
+            $.ajax({
+                url: "/article/getAllArticle",
+                type: "get",
+                dataType: "JSON",
+                success: function (result) {
+                    console.log(result);
+                    var contentNode = "";
+                    $.each(result, function (index, value) {
+                        var timeNode = value.modify_date;
+                        var time = new Date(timeNode);
+                        var nowTime = time.getFullYear() + "-" + time.getMonth() + "-" + time.getDay();
+                        contentNode = "<header>" +
+                            "<a class='cat' href='#'>测试<i></i></a>" +
+                            "<h2>" +
+                            "<a href='/article/getArticle/"+value.id+"'>" + value.name + "</a>" +
+                            "</h2>" +
+                            "</header>" +
+                            "<p>" + value.content + "</p>" +
+                            "<p class='meta'>" +
+                            "<a class='category' href='#'><i" +
+                            "class='glyphicon glyphicon-folder-open'></i> news</a>" +
+                            "<a class='time' href='#'><i class='glyphicon glyphicon-time'></i>" + nowTime + "</a>" +
+                            "<a class='views' href='#'><i class='glyphicon glyphicon-eye-open'></i> 88</a>" +
+                            "<a class='comment' href='#'><i class='glyphicon glyphicon-comment'></i> 10</a>" +
+                            "</p>";
+                        console.log(contentNode);
+                    });
+                    $("#articleList").html(contentNode);
+                }
+            })
+        }
+    </script>
+</head>
+
+<body>
+<header>
+    <nav class="navbar navbar-default" id="navbar">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed"
+                        data-toggle="collapse" data-target="#header-navbar"
+                        aria-expanded="false">
+                    <span class="sr-only"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <h1 class="logo">
+                    <a href="#">Solar System</a>
+                </h1>
+            </div>
+            <div class="collapse navbar-collapse" id="header-navbar">
+                <form class="navbar-form visible-xs" action="#" method="POST">
+                    <div class="input-group">
+                        <input type="text" name="keyword" class="form-control"
+                               placeholder="请输入关键字" maxlength="20" autocomplete="off">
+                        <span class="input-group-btn">
+                                <button type="submit" class="btn btn-default btn-search">搜索</button>
+                            </span>
+                    </div>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/article/writeArticle">写文章</a></li>
+                    <li>
+                        <a th:text="${session.user.name}"></a>
+                    </li>
+                    <li><a href="/user/logout">退出</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="introBanner">
+        <h3>Solar</h3>
+        <p>分享你的世界</p>
+    </div>
+    <div class="content-wrap">
+        <div class="content">
+            <div class="excerpt" id="articleList">
+            </div>
+
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="container">
+        <p>Copyright &copy; 2019.Reedo.Inc All rights reserved</p>
+    </div>
+</div>
+</body>
+
+</html>

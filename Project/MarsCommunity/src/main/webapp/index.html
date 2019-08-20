@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <link rel="stylesheet" href="/Frame/css/bootstrap.css">
+    <link rel="stylesheet" href="/Frame/css/login.css">
+    <!--  注意要将Jquery放bootstrap.js前面，否则会报错  -->
+    <script src="/Frame/script/jquery-3.3.1.js"></script>
+    <script src="/Frame/script/bootstrap.js"></script>
+</head>
+<body>
+<div class="htmleaf-container">
+    <div id="wrapper" class="login-page">
+        <div id="login_form" class="form">
+            <form class="register-form" action="user/register" method="post">
+                <div>
+                    <input type="text" placeholder="用户名" name="username"
+                           id="register_username"/>
+                </div>
+                <div>
+                    <input type="password" placeholder="密码" name="password"
+                           id="register_password"/>
+                </div>
+                <div>
+                    <input type="text" placeholder="电子邮件" name="email"
+                           id="register_email"/>
+                </div>
+                <button id="create" type="submit">创建账户</button>
+                <p class="message">已经有了一个账户? <a href="#">立刻登录</a></p>
+            </form>
+            <form class="login-form" action="user/login" method="post">
+                <div>
+                    <input type="text" placeholder="用户ID" name="id"
+                           id="login_id"/>
+                </div>
+                <div>
+                    <input type="password" placeholder="密码" name="password"
+                           id="login_password"/>
+                </div>
+                <button id="login" type="submit">登　录</button>
+                <p class="message">还没有账户? <a href="#">立刻创建</a></p>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(function () {
+        $("#create").click(function () {
+            check_register();
+            return false;
+        });
+        $("#login").click(function () {
+            check_login();
+            return false;
+        });
+        $('.message a').click(function () {
+            $('form').animate({
+                height: 'toggle',
+                opacity: 'toggle'
+            }, 'slow');
+        });
+    })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.solar.dao.CommentDao">
+    <!--
+        void saveComment(CommentService comment);
+        List<CommentService> findCommentByAuthorId(Integer AuthorId);
+        List<CommentService> findCommentByArticleId(Integer ArticleId);
+        void deleteCommentById(Integer id);
+        List<CommentService> findAllComment();
+    -->
+    <insert id="saveComment" parameterType="com.solar.pojo.Comment">
+        INSERT INTO solar.comment(article_id, author_id, reply_id, content, date)
+        VALUES (#{article_id}, #{author_id}, #{reply_id}, #{content}, #{date})
+    </insert>
+
+    <select id="findCommentByAuthorId" parameterType="int"
+            resultType="com.solar.pojo.Comment">
+        SELECT *
+        FROM solar.comment
+        WHERE author_id = #{AuthorId}
+    </select>
+
+    <select id="findCommentByArticleId" parameterType="int"
+            resultType="com.solar.pojo.Comment">
+        SELECT *
+        FROM solar.comment
+        WHERE article_id = #{article_id}
+    </select>
+
+    <delete id="deleteCommentById" parameterType="int">
+        DELETE
+        FROM solar.comment
+        WHERE id = #{id}
+    </delete>
+
+    <select id="findAllComment" resultType="com.solar.pojo.Comment">
+        SELECT *
+        FROM solar.comment
+    </select>
+</mapper>

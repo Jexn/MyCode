@@ -12,6 +12,13 @@ Tomcat终端乱码分两种情况
 
 - IDEA终端乱码：[IDEA乱码](https://blog.csdn.net/nan_cheung/article/details/79337273);在VM options填写-Dfile.encoding=UTF-8
 
+```
+    解决办法：修改~/conf/logging.properties 文件,改成：
+    java.util.logging.ConsoleHandler.encoding = UTF-8
+    # java.util.logging.ConsoleHandler.encoding = GBK
+```
+    
+
 ## Tomcat部署与解析
 
 [Tomcat部署与配置解析](https://www.cnblogs.com/kismetv/p/7228274.html)

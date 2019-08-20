@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改</title>
+    <link rel="stylesheet" href="/Frame/css/bootstrap.css">
+    <script src="/Frame/script/jquery-3.3.1.js"></script>
+    <script src="/Frame/script/bootstrap.js"></script>
+    <script>
+        $(function () {
+            var id = $("#customerId").text();
+            console.log(id);
+            $.ajax({
+                url: "/customer/getCustomer/" + id,
+                type: "get",
+                dataType: "JSON",
+                success: function (result) {
+                    console.log(result);
+                    $("#form_edit").attr("action", "/customer/modify/" + id);
+                    $("#id").attr("value", result.id);
+                    $("#name").attr("value", result.name);
+                    $("#telephone").attr("value", result.telephone);
+                    $("#address").attr("value", result.address);
+                    $("#remark").attr("value", result.remark);
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+<!--/*@thymesVar id="userId" type="com.mars.controller.CustomerController"*/-->
+<span th:text="${userId}" id="customerId" hidden="hidden"></span>
+<!-- 编辑的模态框 -->
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <form id="form_edit" role="form" action="" method="post">
+                <div class="form-group" hidden="hidden">
+                    <label for="id">id</label>
+                    <input type="text" class="form-control" id="id" value="" />
+                </div>
+                <div class="form-group">
+                    <label for="name">姓名</label>
+                    <input type="text" class="form-control" id="name" name="name" value=""/>
+                </div>
+                <div class="form-group">
+                    <label for="telephone">联系方式</label>
+                    <input type="text" class="form-control" id="telephone" name="telephone" value=""/>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">地址</label>
+                    <input type="text" class="form-control" id="address" name="address" value=""/>
+                </div>
+
+                <div class="form-group">
+                    <label for="remark">备注</label>
+                    <input type="text" class="form-control" id="remark" name="remark" value=""/>
+                </div>
+                <button type="submit" class="btn btn-default">修改</button>
+                <button type="reset" class="btn btn-warning">重置</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

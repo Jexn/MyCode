@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>客户列表</title>
+    <link rel="stylesheet" href="/Frame/css/bootstrap.css">
+    <script src="/Frame/script/jquery-3.3.1.js"></script>
+    <script src="/Frame/script/bootstrap.js"></script>
+    <script>
+        $(function () {
+            getList();
+            $("#getCustomer").click(function () {
+                var userID = $("#userId").val();
+                if (userID != null && userID > 0) {
+                    findCustomerById(userID);
+                } else {
+                    getList();
+                }
+            });
+
+            // 事件委托，修改数据
+            $("tbody").on("click", ".btn-warning", function () {
+                var userId = this.parentNode.parentNode.firstChild.innerHTML;
+                $(location).attr("href", "/customer/modify/" + userId);
+            });
+
+            // 事件委托，删除
+            $("tbody").on("click", ".btn-danger", function () {
+                var check = confirm("确认删除？");
+                if (check){
+                    deleteUser(this);
+                }
+            });
+
+            // 事件绑定，跳转添加
+            $("#add").click(function () {
+                $(location).attr("href", "/customer/toAdd");
+            })
+        });
+
+        function deleteUser(obj) {
+            var userId = obj.parentNode.parentNode.firstChild.innerHTML;
+            $.ajax({
+                url:"/customer/"+userId,
+                type:"delete",
+                success:function () {
+                    getList();
+                }
+            });
+        }
+
+        // 初始化遍历数据
+        function getList() {
+            $.ajax({
+                url: "/customer/allCustomer",
+                type: "get",
+                dataType: "JSON",
+                success: function (result) {
+                    console.log(result);
+                    var dataTR = "";
+                    $.each(result, function (index, value) {
+                        dataTR += "<tr>" +
+                            "<td>" + value.id + "</td>" +
+                            "<td>" + value.name + "</td>" +
+                            "<td>" + value.telephone + "</td>" +
+                            "<td>" + value.address + "</td>" +
+                            "<td>" + value.remark + "</td>" +
+                            "<td>" +
+                            "<button type='button' class='btn btn-sm btn-danger' >删除</button>" +
+                            "<button type='button' class='btn btn-sm btn-warning' >修改</button>" +
+                            "</td>" +
+                            "</tr>";
+                    });
+                    $("tbody").html(dataTR);
+                }
+            })
+        }
+
+        function findCustomerById(userID) {
+            var dataTR = "";
+            $.ajax({
+                url: "/customer/getCustomer/" + userID,
+                type: "get",
+                dataType: "JSON",
+                success: function (result) {
+                    console.log(result);
+                    dataTR =
+                        "<tr>" +
+                        "<td>" + result.id + "</td>" +
+                        "<td>" + result.name + "</td>" +
+                        "<td>" + result.telephone + "</td>" +
+                        "<td>" + result.address + "</td>" +
+                        "<td>" + result.remark + "</td>" +
+                        "<td>" +
+                        "<button type='button' class='btn btn-sm btn-danger' >删除</button>" +
+                        "<button type='button' class='btn btn-sm btn-warning' >修改</button>" +
+                        "</td>" +
+                        "</tr>";
+                    $("tbody").html(dataTR);
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <h3 class="text-center">
+                    客户信息管理
+                </h3>
+                <!--           注意，Ajax请求不能用form表单包裹，否则会刷新整个页面             -->
+                <div class="page-header">
+                    <input id="userId" type="text" name="id" placeholder="请输入id">
+                    <button id="getCustomer" type="button" class="btn btn-sm btn-primary">
+                        查询
+                    </button>
+                    <button id="add" type="button" class="btn btn-sm btn-success">添加
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>姓名</th>
+                    <th>联系方式</th>
+                    <th>地址</th>
+                    <th>备注</th>
+                    <th>编辑</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mars.dao.CustomerDao">
+    <!--
+    void saveCustomer(Customer customer);
+    void deleteCustomer(Integer id);
+    void modifyCustomer(Customer id);
+    Customer findCustomerById(Integer id);
+    List<Customer> findAllCustomer();
+      -->
+    <insert id="saveCustomer" parameterType="com.mars.bean.Customer">
+        INSERT INTO tb_customer(name, telephone, address, remark)
+        values (#{name}, #{telephone}, #{address}, #{remark})
+    </insert>
+
+    <delete id="deleteCustomer" parameterType="int">
+        DELETE
+        FROM tb_customer
+        WHERE id = #{id}
+    </delete>
+
+    <update id="modifyCustomer" parameterType="com.mars.bean.Customer">
+        UPDATE tb_customer
+        SET name      = #{name},
+            telephone = #{telephone},
+            address=#{address},
+            remark=#{remark}
+        WHERE id = #{id}
+    </update>
+
+    <select id="findCustomerById" parameterType="int" resultType="com.mars.bean.Customer">
+        SELECT * FROM tb_customer WHERE id = #{id}
+    </select>
+
+    <select id="findAllCustomer" resultType="com.mars.bean.Customer">
+        SELECT * FROM tb_customer
+    </select>
+</mapper>

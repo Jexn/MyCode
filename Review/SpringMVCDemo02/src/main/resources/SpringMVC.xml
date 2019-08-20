@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <context:component-scan base-package="com.cube"/>
+
+    <!--  注册MultipartResolver，由DispatcherServlet来调用  -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--设置字符编码防止文件名乱码-->
+        <property name="defaultEncoding" value="utf-8"/>
+        <!--设置上传文件的总大小，单位是字节b-->
+        <!--        <property name="maxUploadSize" value="1048576"/>-->
+        <!--设置单个上传文件的大小，单位是字节b-->
+        <property name="maxUploadSizePerFile" value="10485760"/>
+        <!--设置内存缓冲区的大小，当超过该值的时候会写入到临时目录-->
+        <!--        <property name="maxInMemorySize" value="1048576"/>-->
+        <!--设置临时目录-->
+        <!--        <property name="uploadTempDir" value="tempUpload"/>-->
+        <!--默认是false，如果设置为true的话，不会将文件路径去除，在IE浏览器下上传时会将路径名也作为文件名上传：D:\image\monkey.png-->
+        <!--        <property name="preserveFilename" value="false"/>-->
+        <!--是否使用懒加载，默认是false-->
+        <!--        <property name="resolveLazily" value="true"/>-->
+    </bean>
+
+    <bean id="internalResourceViewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--  静态资源处理  -->
+    <mvc:resources mapping="script/**" location="script/"/>
+
+    <mvc:annotation-driven/>
+</beans>

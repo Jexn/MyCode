@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.solar.dao.UserDao">
+    <!--    User findUserByName(String name);-->
+    <!--    User findUserById(Integer id);-->
+    <!--    void updateUserInfo(User user);-->
+    <!--    void deleteUserById(Integer id);-->
+    <!--    void saveUser(User user);-->
+    <!--    List<User> findAllUser();-->
+
+    <select id="findUserByName" parameterType="string" resultType="com.solar.pojo.User">
+        SELECT *
+        FROM solar.user
+        WHERE name = #{name}
+    </select>
+
+    <select id="findUserById" parameterType="int" resultType="com.solar.pojo.User">
+        SELECT *
+        FROM solar.user
+        WHERE id = #{id}
+    </select>
+
+    <select id="updateUserInfo" parameterType="com.solar.pojo.User">
+        UPDATE solar.user
+        SET name        =#{name},
+            password    = #{password},
+            sex         = #{sex},
+            age         = #{age},
+            remark      = #{remark},
+            create_date = #{create_date}
+        where id = #{id}
+    </select>
+
+    <delete id="deleteUserById" parameterType="int">
+        DELETE
+        FROM solar.user
+        WHERE id = #{id}
+    </delete>
+
+    <insert id="saveUser" parameterType="com.solar.pojo.User">
+        INSERT INTO solar.user(name, password, sex, age, remark, create_date)
+        VALUES (#{name}, #{password}, #{sex}, #{age}, #{remark}, #{create_date})
+    </insert>
+
+    <select id="findAllUser">
+        SELECT *
+        FROM solar.user
+    </select>
+</mapper>

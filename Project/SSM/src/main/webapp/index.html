@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <script src="/script/bootstrap.js"></script>
+    <script src="/script/jquery-3.3.1.js"></script>
+</head>
+<body>
+<div class="container">
+    <h3>SSM简单整合</h3>
+    <p><a href="account/findAllAccount">查找所有账户</a></p>
+    <h3>保存</h3>
+    <form action="account/addAccount" method="post" class="form-horizontal" role="form">
+        <div class="form-group">
+            <label for="name">姓名:</label>
+            <input type="text" name="name" id="name">
+        </div>
+        <div class="form-group">
+            <label for="money">金额:</label>
+            <input type="text" name="money" id="money">
+        </div>
+        <div class="form-group">
+            <div class="col-sm-1">
+                <button type="submit" class="btn btn-default">提交</button>
+            </div>
+            <div class="col-sm-1">
+                <button type="reset" class="btn btn-default">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

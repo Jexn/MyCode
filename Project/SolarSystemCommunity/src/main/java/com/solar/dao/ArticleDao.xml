@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.solar.dao.ArticleDao">
+    <!--
+        void saveArticle(Article article);
+        // 根据文章id删除文章
+        void deleteArticleById(Integer id);
+        // 根据作者id,删除其作者所有文章
+        void deleteAuthorAllArticleByAuthorId(Integer AuthorId);
+        // 根据文章id查找文章
+        Article findArticleById(Integer id);
+        // 根据作者id，查找其所有文章
+        List<Article> findAuthorAllArticleByAuthorId(Integer AuthorId);
+        // 根据作者姓名，查找其所有文章
+        List<Article> findAuthorAllArticleByAuthorName(String AuthorName);
+        // 更新文章信息
+        void updateArticleInfo(Article article);
+    -->
+    <insert id="saveArticle" parameterType="com.solar.pojo.Article">
+        INSERT INTO solar.article(name, author_id, author_name, content, create_date,
+                                  modify_date)
+        VALUES (#{name}, #{author_id}, #{author_name}, #{content}, #{create_date},
+                #{modify_date})
+    </insert>
+
+    <delete id="deleteArticleById" parameterType="int">
+        DELETE
+        FROM solar.article
+        WHERE id = #{id}
+    </delete>
+
+    <delete id="deleteAuthorAllArticleByAuthorId" parameterType="int">
+        DELETE
+        FROM solar.article
+        WHERE author_id = #{AuthorId}
+    </delete>
+
+    <select id="findArticleById" parameterType="int" resultType="com.solar.pojo.Article">
+        SELECT *
+        FROM solar.article
+        WHERE id = #{id}
+    </select>
+
+    <select id="findAuthorAllArticleByAuthorId" parameterType="int"
+            resultType="com.solar.pojo.Article">
+        SELECT *
+        FROM solar.article
+        WHERE author_id = #{id}
+    </select>
+
+    <select id="findAuthorAllArticleByAuthorName" parameterType="string"
+            resultType="com.solar.pojo.Article">
+        SELECT *
+        FROM solar.article
+        WHERE author_name = #{AuthorName}
+    </select>
+
+    <update id="updateArticleInfo" parameterType="com.solar.pojo.Article">
+        UPDATE solar.article
+        set name        = #{name},
+            author_id   = #{author_id},
+            author_name = #{author_name},
+            content     = #{content},
+            create_date = #{create_date},
+            modify_date = #{modify_date}
+        WHERE id = #{id}
+    </update>
+
+    <select id="findArticleLimit" resultType="com.solar.pojo.Article">
+        SELECT * FROM solar.article order by modify_date DESC LIMIT 5;
+    </select>
+</mapper>

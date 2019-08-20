@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录成功</title>
+</head>
+<body>
+    <h3>登录成功</h3>
+    <!--/*@thymesVar id="user" type="com.mars.bean.User"*/-->
+    <p th:text="${user.username}+',欢迎来到火星'"></p>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cube.dao.AccountDao">
+    <select id="findAll" resultType="com.cube.bean.Account">
+        SELECT * FROM ssm.account;
+    </select>
+
+    <insert id="saveAccount">
+        INSERT INTO ssm.account (name, money) VALUES (#{name},#{money})
+    </insert>
+</mapper>

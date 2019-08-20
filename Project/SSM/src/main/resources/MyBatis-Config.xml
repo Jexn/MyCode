@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--  这个配置文件可以在Spring.xml整合,environments相当于在Spring配置配置连接池 ,mappers相当于配置dao接口 -->
+    <!--  配置环境  -->
+    <environments default="mysql">
+        <environment id="mysql">
+            <transactionManager type="jdbc"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url"
+                          value="jdbc:mysql://localhost:3306/ssm?serverTimezone=Asia/Shanghai"/>
+                <property name="username" value="root"/>
+                <property name="password" value="passwd"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <!--        <mapper resource="com/cube/dao/AccountDao.xml"/>-->
+        <package name="com.cube.dao"/>
+    </mappers>
+</configuration>
